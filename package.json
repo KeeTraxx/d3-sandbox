@@ -1,0 +1,21 @@
+{
+  "name": "d3-techworkshop-presentation",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "parcel ./src/index.html"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "babel-runtime": "^6.26.0",
+    "d3": "^5.11.0",
+    "parcel-bundler": "^1.12.3",
+    "topojson": "^3.0.2"
+  },
+  "devDependencies": {
+    "sass": "^1.23.0-module.beta.1"
+  }
+}
