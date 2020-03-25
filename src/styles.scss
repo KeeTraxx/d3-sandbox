@@ -7,26 +7,14 @@ html, body {
 body {
     display: flex;
     flex-direction: row;
-    height: 100vh;
-    width: 100vw;
-    overflow: hidden;
 }
 
 main {
     background-color: #ddd;
-    flex: 1 1 960px;
-    > svg {
-        width: 100%;
-        height: 100%;
-
-        path {
-            fill: none;
-            stroke: black;
-        }
-    }
+    flex: 1 1;
 }
 
 aside {
     background-color: #ccc;
-    flex: 0 0 15rem;
+    flex: 0 0;
 }

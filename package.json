@@ -1,5 +1,5 @@
 {
-  "name": "d3-techworkshop-presentation",
+  "name": "d3-sandbox",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -16,6 +16,6 @@
     "topojson": "^3.0.2"
   },
   "devDependencies": {
-    "sass": "^1.23.0-module.beta.1"
+    "sass": "^1.26.2"
   }
 }
