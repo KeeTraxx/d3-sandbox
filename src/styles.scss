@@ -12,6 +12,12 @@ body {
 main {
     background-color: #ddd;
     flex: 1 1;
+    box-sizing: border-box;
+
+    td {
+        padding: 0.5rem;
+        min-width: 10rem;
+    }
 }
 
 aside {
