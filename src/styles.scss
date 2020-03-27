@@ -20,9 +20,10 @@ main {
     }
 
     svg {
-        text {
-            text-anchor: middle;
-            dominant-baseline: central;
+        path {
+            fill: none;
+            stroke: black;
+            stroke-width: 1px;
         }
     }
 }
