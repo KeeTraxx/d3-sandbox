@@ -55,24 +55,50 @@ async function main() {
     .domain(totalCasesByCanton.map(d => d.value))
     .range(['green', 'yellow' ,'red']);
 
-    d3.select('main') // select the first html <main> tag
-    .append('table') // append an <ul> tag
-    .selectAll('tr') // for all all <li> tags...
-    .data(totalCasesByCanton) // ... bind the data array to the DOM elements
-    .join('tr')
-    .call(tr => {
-      tr.append('td').text(d => d.key);
-      tr.append('td').text(d => d.value);
+  const bubbleSize = d3.scaleLinear()
+    .domain(d3.extent(totalCasesByCanton, d => d.value))
+    .range([10, 100]);
+
+  const simulation = d3.forceSimulation(totalCasesByCanton)
+    .force('collide', d3.forceCollide().strength(0.5).radius(d => bubbleSize(d.value) * 1.1))
+    .force('centerX', d3.forceX().strength(0.01))
+    .force('centerY', d3.forceY().strength(0.01))
+    //.force('manybody', d3.forceManyBody().strength(30));
+  
+  d3.select('main')
+    .append('svg')
+    .attr('width', 640)
+    .attr('height', 480)
+    .attr('viewBox', '-320 -240 640 480')
+    .selectAll('g')
+    .data(totalCasesByCanton)
+    .join('g')
+    .call(g => {
+      g.append('circle')
+        .attr('r', d => bubbleSize(d.value))
+        .attr('fill', d => quantizeColor(d.value));
+      g.append('text').text(d => d.key);
+      return g
     })
-    .style('opacity', 0)
-    .style('transform', 'translate(80px,0)rotate(30deg)')
-    .transition()
-    .delay((d,i) => i * 100) // delay by 100 ms * index
-    .style('opacity', 1)
-    .style('transform', 'translate(0,0)')
-    .transition()
-    .duration(2500)
-    .style('background-color', d => quantileColor(d.value)); // try out other scales!
+    .call(d3.drag().on('start', d => {
+      if (!d3.event.active) simulation.alphaTarget(1).restart();
+      d.fx = d3.event.x;
+      d.fy = d3.event.y;
+    })
+    .on('drag', d => {
+      d.fx = d3.event.x;
+      d.fy = d3.event.y;
+    }).on('end', d => {
+      if (!d3.event.active) simulation.alphaTarget(0);
+      d.fx = null
+      d.fy = null
+      
+    }))
+  simulation.on('tick', () => {
+    d3.select('svg')
+      .selectAll('g')
+      .attr('transform', d => `translate(${d.x},${d.y})`)
+  });
 
 };
 

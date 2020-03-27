@@ -18,6 +18,13 @@ main {
         padding: 0.5rem;
         min-width: 10rem;
     }
+
+    svg {
+        text {
+            text-anchor: middle;
+            dominant-baseline: central;
+        }
+    }
 }
 
 aside {
