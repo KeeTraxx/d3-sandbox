@@ -13,7 +13,7 @@
     "babel-runtime": "^6.26.0",
     "d3": "^5.11.0",
     "parcel-bundler": "^1.12.3",
-    "topojson": "^3.0.2"
+    "topojson-client": "^3.1.0"
   },
   "devDependencies": {
     "sass": "^1.26.2"
