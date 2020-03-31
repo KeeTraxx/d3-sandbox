@@ -20,5 +20,5 @@ export async function fetchCovidData() {
     }
     return row;
   });
-  return data;
+  return data.filter(d => d.total_positive_cases);
 }
