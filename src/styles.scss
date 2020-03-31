@@ -18,6 +18,14 @@ main {
         padding: 0.5rem;
         min-width: 10rem;
     }
+
+    svg {
+        path {
+            fill: none;
+            stroke: black;
+            stroke-width: 1;
+        }
+    }
 }
 
 aside {
