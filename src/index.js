@@ -19,16 +19,19 @@ async function main() {
     .entries(data);
 
   const groupByCanton = d3.nest()
-  .key(d => d.abbreviation_canton);
+    .key(d => d.abbreviation_canton);
 
-  const groupedData = groupByCanton.entries(data);
+  const groupedData = groupByCanton.entries(data.filter(d => d.total_currently_positive_cases));
   // [{key: "BE", values: [...], key: "ZH", values: [...]}]
+
+  const groupedByDate = d3.nest()
+    .key(d => d.date).entries(data);
 
   console.log('groupedData', groupedData);
 
   const chartElement = d3.select('main')
     .append('svg')
-    .attr('width', 960)
+    .attr('width', 1000)
     .attr('height', 500)
     .attr('viewBox', '0 0 960 500')
     .append('g')
@@ -64,7 +67,18 @@ async function main() {
     .selectAll('path')
     .data(groupedData)
     .join('path')
-    .attr('d', d => line(d.values.filter(d => d.total_currently_positive_cases)));
+    .attr('d', d => line(d.values.filter(d => d.total_currently_positive_cases)))
+    .style('stroke', (d, i) => d3.schemeCategory10[i%11]);
+
+  chartElement
+    .append('g')
+    .selectAll('text')
+    .data(groupedData)
+    .join('text')
+    .text(d => d.key)
+    .attr('x', d => x(d.values[d.values.length-1].date))
+    .attr('y', d => y(d.values[d.values.length-1].total_currently_positive_cases))
+    .style('stroke', (d, i) => d3.schemeCategory10[i%11]);
     
 };
 
