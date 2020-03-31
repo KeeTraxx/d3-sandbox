@@ -20,5 +20,5 @@ export async function fetchCovidData() {
     }
     return row;
   });
-  return data.filter(d => d.total_positive_cases);
+  return data.filter(d => d.total_currently_positive_cases);
 }
