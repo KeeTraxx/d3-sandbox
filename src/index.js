@@ -43,16 +43,16 @@ async function main() {
 
   const xAxis = d3.axisBottom(x);
 
+  chartElement
+    .append('g')
+    .attr('transform', 'translate(0,400)')
+    .call(xAxis);
+
   const y = d3.scaleLinear()
     .domain(d3.extent(data, d => d.total_currently_positive_cases))
     .range([400,0]);
 
   const yAxis = d3.axisLeft(y);
-
-  chartElement
-    .append('g')
-    .attr('transform', 'translate(0,400)')
-    .call(xAxis);
 
   chartElement
     .append('g')
